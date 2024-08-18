@@ -77,8 +77,7 @@ const SearchBooks = () => {
 
     try {
       const response = await saveBook({
-        variables: { book: bookToSave },
-        refetchQueries: [SAVE_BOOK, 'saveBook']
+        variables: { book: bookToSave }
       })
 
       if (error) {

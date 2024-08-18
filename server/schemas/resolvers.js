@@ -41,7 +41,7 @@ const resolvers = {
                 }
                )
 
-               console.log(context.user)
+               console.log(user)
                return user
             }
             throw AuthenticationError
