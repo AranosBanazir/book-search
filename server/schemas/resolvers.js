@@ -15,7 +15,7 @@ const resolvers = {
         
            const newUser = await User.create(user)
       
-            const token = signToken(user)
+            const token = signToken(newUser)
        
             return {token}
         },
