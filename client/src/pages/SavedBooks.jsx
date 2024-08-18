@@ -29,7 +29,7 @@ const SavedBooks = () => {
 		}
 
 		try {
-			const { data } = await removeBook({ variables: { bookId } })
+			const { data } = await removeBook({ variables: { bookId }, refetchQueries: [ME, 'me'] })
 			if (removeBookError) {
 				throw new Error('something went wrong!')
 			}
