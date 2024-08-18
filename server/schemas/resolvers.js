@@ -17,21 +17,22 @@ const resolvers = {
       
             const token = signToken(user)
        
-            return { token, newUser}
+            return {token}
         },
         login: async (parent, { email, password }, context) => {
             const user = await User.findOne({ email })
-
+            
             if (!user) throw AuthenticationError
-
+            
             const isCorrectPassword = user.isCorrectPassword(password)
             if (!isCorrectPassword) throw AuthenticationError
             const token = signToken(user)
-            return { token, user }
+            return {token}
         },
         saveBook: async (parent, { book }, context ) => {
             if (context.user) {
-               return User.findByIdAndUpdate(
+                console.log(book)
+               const user = await User.findByIdAndUpdate(
                 context.user._id,{
                   $addToSet: { savedBooks: book }
                 },{ 
@@ -39,6 +40,9 @@ const resolvers = {
                   runValidators: true 
                 }
                )
+
+               console.log(context.user)
+               return user
             }
             throw AuthenticationError
         },
